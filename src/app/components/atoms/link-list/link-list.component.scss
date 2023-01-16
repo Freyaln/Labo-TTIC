@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 55%;
+  background-color: antiquewhite;
+
+  li {
+    list-style: none;
+    background-color: antiquewhite;
+    padding-right: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}

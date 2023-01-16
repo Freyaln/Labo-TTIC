@@ -1,0 +1,23 @@
+<section class="general-chart">
+  <h2 class="title">Covid-19 general stats</h2>
+
+  <article class="general-options-display">
+  <div class="select">
+    <app-country-selector (selectedCountry)="onSelectCountry($event)"></app-country-selector>
+    <app-chart-type-selector (selectedType)="onSelectType($event)"></app-chart-type-selector>
+    <app-date-picker (selectedDate)="onDatePicked($event)"></app-date-picker>
+  </div>
+    <div class="checkboxes">
+      <app-checbox-selector (BoxChecked)="onTick($event)"></app-checbox-selector>
+    </div>
+  </article>
+
+  <div *ngIf="!isLoaded">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="isLoaded" class="chart-container">
+    <app-chart [datasets]="chartDataset" [labels]="chartLabels" [options]="lineOptions" [chartType]="selectedType"></app-chart>
+  </div>
+
+</section>
+

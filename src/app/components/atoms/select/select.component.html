@@ -1,0 +1,16 @@
+<ng-container *ngIf="type === 'country'">
+  <select [(ngModel)]="selectedValue" (change)="onSelectValue()">
+    <option *ngFor="let option of optionsList">{{option.Country}}</option>
+  </select>
+</ng-container>
+
+<ng-container *ngIf="type === 'type'">
+  <select [(ngModel)]="selectedValue" (change)="onSelectValue()">
+    <option>Line</option>
+    <option>Bar</option>
+  </select>
+</ng-container>
+
+
+
+

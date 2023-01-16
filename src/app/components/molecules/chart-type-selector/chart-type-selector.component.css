@@ -1,0 +1,9 @@
+.select-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+/*# sourceMappingURL=chart-type-selector.component.css.map */

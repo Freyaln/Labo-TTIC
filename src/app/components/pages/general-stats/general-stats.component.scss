@@ -1,0 +1,32 @@
+.general-chart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+
+  .general-options-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .select {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .checkboxes {
+    margin-bottom: 0.5rem;
+  }
+
+  .chart-container {
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+  }
+}
