@@ -4,11 +4,11 @@ import {PopestiapiService} from "../../../services/popestiapi.service";
 import {DataHandlingService} from "../../../services/data-handling.service";
 
 @Component({
-  selector: 'app-general-stats',
-  templateUrl: './general-stats.component.html',
-  styleUrls: ['./general-stats.component.scss']
+  selector: 'app-by-country',
+  templateUrl: './by-country.component.html',
+  styleUrls: ['./by-country.component.scss']
 })
-export class GeneralStatsComponent {
+export class ByCountryComponent {
 
   chartDataset: any;
   chartLabels: any;

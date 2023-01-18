@@ -7,7 +7,7 @@ import { NavbarComponent } from './components/molecules/navbar/navbar.component'
 import { ButtonComponent } from './components/atoms/button/button.component';
 import { SearchBarComponent } from './components/molecules/search-bar/search-bar.component';
 import { HeaderComponent } from './components/organisms/header/header.component';
-import { GeneralStatsComponent } from './components/pages/general-stats/general-stats.component';
+import { ByCountryComponent } from './components/pages/by-country/by-country.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NgChartsModule} from "ng2-charts";
 import {FormsModule} from "@angular/forms";
@@ -36,7 +36,7 @@ import { ChartComponent } from './components/organisms/chart/chart.component';
     ButtonComponent,
     SearchBarComponent,
     HeaderComponent,
-    GeneralStatsComponent,
+    ByCountryComponent,
     SelectComponent,
     CountrySelectorComponent,
     ChecboxSelectorComponent,
