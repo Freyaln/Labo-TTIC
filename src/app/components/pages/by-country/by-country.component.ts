@@ -18,7 +18,7 @@ export class ByCountryComponent {
   };
   country: string = 'belgium';
   selectedDateStart: string = '03/01/2020';
-  selectedDateEnd: string = '07/01/2020';
+  selectedDateEnd: string = '04/01/2020';
   deathsChecked: boolean = false;
   recoveredChecked: boolean = false;
   confirmedChecked: boolean = false;

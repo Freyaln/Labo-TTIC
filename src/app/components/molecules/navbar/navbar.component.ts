@@ -11,7 +11,7 @@ export class NavbarComponent {
   menuItems: ListInterface[] = [
     {label: 'Home', link: '/homepage'},
     {label: 'By country', link: '/by-country'},
-    {label: 'From day one', link: '/day-one'},
+    {label: 'Comparisons charts', link: '/comparisons'},
     {label: 'Live by country', link: '/live-cases'},
     {label: 'Live by country', link: '/general-infos'}
   ];

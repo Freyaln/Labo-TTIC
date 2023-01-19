@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {GeneralDatas, PopestiapiService} from "./popestiapi.service";
+import {GeneralDatas, PopestiapiService, SummaryDatas} from "./popestiapi.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,22 @@ export class DataHandlingService {
 
   // @ts-ignore
   processedDatas: Idataset;
+  // @ts-ignore
+  processedDeathDatas: Idataset;
+  // @ts-ignore
+  processedConfirmedDatas: Idataset;
+  // @ts-ignore
+  processedPercentage: Idataset;
 
 
   constructor(private _popestiapiService: PopestiapiService) {}
+
+  randomRGB() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
 
   countryDataHandler(datas: GeneralDatas[]) {
     this.processedDatas = {
@@ -28,8 +41,8 @@ export class DataHandlingService {
           borderColor: 'rgb(35,69,168)'
         },
         {
-          data: datas.map((i) => i.Recovered),
-          label: `Recovered from ${datas[0].Country}`,
+          data: datas.map((i) => i.Confirmed),
+          label: `Confirmed from ${datas[0].Country}`,
           backgroundColor: 'rgb(211,202,9)',
           borderColor: 'rgb(198,218,55)'
         }
@@ -38,15 +51,102 @@ export class DataHandlingService {
     }
     return this.processedDatas;
   }
+
+  percentageDeathsToConfirmedHandler(deathsDatas: any, confirmedDatas: any) {
+    let percentage: IPercent[] = [];
+    for (let i = 0; i < deathsDatas.labels.length; i++) {
+      let country = deathsDatas.labels[i]
+      let confirmedIndex = confirmedDatas.labels.indexOf(country);
+      if(confirmedIndex !== -1) {
+        let deaths = deathsDatas.dataset[0].data[i];
+        let confirmed = confirmedDatas.dataset[0].data[confirmedIndex];
+        let percent: number = (deaths/confirmed)*100
+        percentage.push({
+          Country: country,
+          PercentageOfDeath: percent
+        })
+        this.processedPercentage = {
+          dataset: [{
+            data: percentage.map((i) => i.PercentageOfDeath),
+            label: 'Percentage of deaths to confirmed case in top 100k countries',
+            backgroundColor: percentage.map((i) => this.randomRGB())
+          }],
+          labels: percentage.map((i) => i.Country)
+        }
+      }
+    }
+    return this.processedPercentage;
+  }
+
+  confirmedDataHandler(datas: SummaryDatas) {
+    const filteredDatas = datas.Countries.filter(elem => elem.TotalDeaths >= 100000);
+    const preDatas = filteredDatas.sort((a,b) => b.TotalConfirmed - a.TotalConfirmed)
+    this.processedConfirmedDatas = {
+      dataset: [{
+        data: preDatas.map((i) => i.TotalConfirmed),
+        label: "Confirmed cases in top 100k countries",
+        backgroundColor: preDatas.map((i) => this.randomRGB())
+      }],
+      labels: preDatas.map((i) => i.Country)
+    }
+    return this.processedConfirmedDatas;
+  }
+
+  deathsDataHandler(datas: SummaryDatas) {
+    // optimized way
+    const filteredDatas = datas.Countries.filter(elem => elem.TotalDeaths >= 100000);
+    const preDatas = filteredDatas.sort((a,b) => b.TotalDeaths - a.TotalDeaths)
+    this.processedDeathDatas = {
+      dataset: [{
+        data: preDatas.map((i) => i.TotalDeaths),
+        label: "Countries that had more than 100k deaths",
+        backgroundColor: preDatas.map((i) => this.randomRGB())
+      }],
+      labels: preDatas.map((i) => i.Country)
+    }
+    return this.processedDeathDatas;
+
+    // Un-optimized way
+    // datas.Countries.forEach((elem, index) => {
+    //   if (elem.TotalDeaths >= 100000) {
+    //     this.preProcessDeath[index] = {
+    //       Country: elem.Country,
+    //       TotalDeaths: elem.TotalDeaths
+    //     }
+    //   }
+    // })
+    // this.processedDeathDatas = {
+    //   dataset: [{
+    //     data: this.preProcessDeath
+    //       .filter(i => i.TotalDeaths !== null && i.TotalDeaths !== undefined)
+    //       .map((i) => i.TotalDeaths),
+    //     label: 'Total deaths in country'
+    //   }],
+    //   labels: this.preProcessDeath
+    //     .filter(i => i.Country !== null && i.Country !== undefined)
+    //     .map((i) => i.Country)
+    // }
+    // return this.processedDeathDatas;
+  }
 }
 export interface IDataLabelColors {
   data: number[],
   label: string,
-  backgroundColor: string,
-  borderColor: string
+  backgroundColor?: string | string[],
+  borderColor?: string
 }
 
 export interface Idataset {
   dataset: IDataLabelColors[],
   labels: string[] | string
+}
+
+export interface IDeaths {
+  Country: string,
+  TotalDeaths: number
+}
+
+export interface IPercent {
+  Country: string,
+  PercentageOfDeath: number
 }

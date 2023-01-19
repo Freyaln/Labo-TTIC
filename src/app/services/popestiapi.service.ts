@@ -20,10 +20,9 @@ export class PopestiapiService {
     return this.http.get<GeneralDatas[]>(`https://api.covid19api.com/live/country/${country}/status/confirmed/date/${date}`)
     }
 
-    getFromDayOne(country: string) {
-      return this.http.get<GeneralDatas[]>(`https://api.covid19api.com/dayone/country/${country}`)
+    getAllDatas() {
+      return this.http.get<SummaryDatas>(`https://api.covid19api.com/summary`)
     }
-
 }
 
 export interface GeneralDatas {
@@ -44,4 +43,32 @@ export interface GeneralDatas {
 
 export interface Countries {
   Country: string
+}
+
+export interface SummaryGlobal {
+  NewConfirmed: number,
+  TotalConfirmed: number,
+  NewDeaths: number,
+  TotalDeaths: number,
+  NewRecovered: number,
+  TotalRecovered: number,
+  Date: string
+}
+
+export interface SummaryCountry {
+  Country: string,
+  CountryCode: string,
+  Slug: string,
+  NewConfirmed: number,
+  TotalConfirmed: number,
+  NewDeaths: number,
+  TotalDeaths: number,
+  NewRecovered: number,
+  TotalRecovered: number,
+  Date: string
+}
+
+export interface SummaryDatas {
+  Global: SummaryGlobal[],
+  Countries: SummaryCountry[]
 }

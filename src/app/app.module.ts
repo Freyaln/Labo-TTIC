@@ -22,7 +22,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { DatePickerComponent } from './components/molecules/date-picker/date-picker.component';
 import { HomepageComponent } from './components/pages/homepage/homepage.component';
 import { LinkListComponent } from './components/atoms/link-list/link-list.component';
-import { DayOneComponent } from './components/pages/day-one/day-one.component';
+import { ComparisonsComponent } from './components/pages/comparisons/comparisons.component';
 import { LiveCasesComponent } from './components/pages/live-cases/live-cases.component';
 import { GeneralInfosComponent } from './components/pages/general-infos/general-infos.component';
 import { MainPageComponent } from './components/templates/main-page/main-page.component';
@@ -44,7 +44,7 @@ import { ChartComponent } from './components/organisms/chart/chart.component';
     DatePickerComponent,
     HomepageComponent,
     LinkListComponent,
-    DayOneComponent,
+    ComparisonsComponent,
     LiveCasesComponent,
     GeneralInfosComponent,
     MainPageComponent,

@@ -5,7 +5,10 @@
   <div class="select">
     <app-country-selector (selectedCountry)="onSelectCountry($event)"></app-country-selector>
     <app-chart-type-selector (selectedType)="onSelectType($event)"></app-chart-type-selector>
-    <app-date-picker (selectedDate)="onDatePicked($event)"></app-date-picker>
+      <div>
+        <app-date-picker (selectedDate)="onDatePicked($event)"></app-date-picker>
+        <p>For the sake of readability I advise you to search only two months apart</p>
+      </div>
   </div>
     <div class="checkboxes">
       <app-checbox-selector (BoxChecked)="onTick($event)"></app-checbox-selector>
