@@ -28,6 +28,7 @@ import { GeneralInfosComponent } from './components/pages/general-infos/general-
 import { MainPageComponent } from './components/templates/main-page/main-page.component';
 import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/loading-spinner.component';
 import { ChartComponent } from './components/organisms/chart/chart.component';
+import { ListComponent } from './components/atoms/list/list.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ChartComponent } from './components/organisms/chart/chart.component';
     MainPageComponent,
     LoadingSpinnerComponent,
     ChartComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

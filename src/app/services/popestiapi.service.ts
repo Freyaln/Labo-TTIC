@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PopestiapiService {
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
     getAllCountries() {
     return this.http.get<Countries[]>('https://api.covid19api.com/countries')
@@ -23,6 +26,37 @@ export class PopestiapiService {
     getAllDatas() {
       return this.http.get<SummaryDatas>(`https://api.covid19api.com/summary`)
     }
+
+    getAllCompanies() {
+      return this.http.get<ICompanies>(`${environment.rawg_url}/developers?key=${environment.rawg_apiKey}`)
+    }
+
+  getPage(link: string) {
+    return this.http.get<ICompanies>(`${link}`)
+  }
+}
+
+export interface ICompanies {
+  count: number,
+  next: string | null,
+  previous: string | null,
+  results: ICompaniesResult[]
+}
+
+export interface ICompaniesResult {
+  games: IGames[],
+  games_count: number,
+  id: number,
+  image_background: string,
+  name: string,
+  slug: string
+}
+
+export interface IGames {
+  added: number,
+  id: number,
+  name: string,
+  slug: string
 }
 
 export interface GeneralDatas {

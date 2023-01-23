@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {GeneralDatas, PopestiapiService, SummaryDatas} from "./popestiapi.service";
+import {GeneralDatas, ICompanies, ICompaniesResult, PopestiapiService, SummaryDatas} from "./popestiapi.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +15,16 @@ export class DataHandlingService {
   processedConfirmedDatas: Idataset;
   // @ts-ignore
   processedPercentage: Idataset;
+  // @ts-ignore
+  processedGamesCountDatas: Idataset;
 
 
   constructor(private _popestiapiService: PopestiapiService) {}
 
   randomRGB() {
-    const r = Math.floor(Math.random() * 256);
-    const g = Math.floor(Math.random() * 256);
-    const b = Math.floor(Math.random() * 256);
+    const r = Math.floor(Math.random() * 128);
+    const g = Math.floor(Math.random() * 128);
+    const b = Math.floor(Math.random() * 128);
     return `rgb(${r}, ${g}, ${b})`;
   }
 
@@ -92,6 +94,18 @@ export class DataHandlingService {
     return this.processedConfirmedDatas;
   }
 
+  gamesCountDataHandler(datas: ICompaniesResult[]) {
+    this.processedGamesCountDatas = {
+      dataset: [{
+        data: datas.map((i) => i.games_count),
+        label: '',
+        backgroundColor: datas.map((i) => this.randomRGB())
+      }],
+      labels: datas.map((i) => i.name)
+    };
+    return this.processedGamesCountDatas;
+  }
+
   deathsDataHandler(datas: SummaryDatas) {
     // optimized way
     const filteredDatas = datas.Countries.filter(elem => elem.TotalDeaths >= 100000);
@@ -104,6 +118,7 @@ export class DataHandlingService {
       }],
       labels: preDatas.map((i) => i.Country)
     }
+    console.log(this.processedDeathDatas)
     return this.processedDeathDatas;
 
     // Un-optimized way
@@ -131,7 +146,7 @@ export class DataHandlingService {
 }
 export interface IDataLabelColors {
   data: number[],
-  label: string,
+  label: string | string[],
   backgroundColor?: string | string[],
   borderColor?: string
 }

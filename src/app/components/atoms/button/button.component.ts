@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ButtonComponent {
 
+  @Input() submit: boolean = false;
+  @Input() customClass: string = '';
+  @Input() children: any = '';
+  @Output() onClick: EventEmitter<any> = new EventEmitter();
+}
+
+export interface IButton {
+  children: any,
+  customClass?: string,
+  submit?: boolean
 }
