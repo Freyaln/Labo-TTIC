@@ -1,13 +1,14 @@
 <section class="general-chart">
+  <article>
+    <h2 class="title">Games count for shown companies</h2>
 
-
-  <h2 class="title">Games count for shown companies</h2>
-
-  <div class="general-disposition">
-    <app-list [itemList]="developersName" [customClass]="'list'"></app-list>
-    <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
-    <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>
-  </div>
+    <div class="general-disposition">
+      <app-list [itemList]="developersNameId" [customClass]="'list'"></app-list>
+      <div class="button-disposition">
+        <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
+        <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>
+      </div>
+    </div>
 
     <div *ngIf="!isLoaded">
       <app-loading-spinner></app-loading-spinner>
@@ -15,28 +16,12 @@
     <div *ngIf="isLoaded"  class="chart-container">
       <app-chart [datasets]="gamesDataset" [labels]="gamesLabels" [options]="gamesOptions" [chartType]="selectedType"></app-chart>
     </div>
-<!--  <h2 class="title">Covid-19 general stats</h2>-->
-
-<!--  <article class="general-options-display">-->
-<!--  <div class="select">-->
-<!--    <app-country-selector (selectedCountry)="onSelectCountry($event)"></app-country-selector>-->
-<!--    <app-chart-type-selector (selectedType)="onSelectType($event)"></app-chart-type-selector>-->
-<!--      <div>-->
-<!--        <app-date-picker (selectedDate)="onDatePicked($event)"></app-date-picker>-->
-<!--        <p>For the sake of readability I advise you to search only two months apart</p>-->
-<!--      </div>-->
-<!--  </div>-->
-<!--    <div class="checkboxes">-->
-<!--      <app-checbox-selector (BoxChecked)="onTick($event)"></app-checbox-selector>-->
-<!--    </div>-->
-<!--  </article>-->
-
-<!--  <div *ngIf="!isLoaded">-->
-<!--    <app-loading-spinner></app-loading-spinner>-->
-<!--  </div>-->
-<!--  <div *ngIf="isLoaded" class="chart-container">-->
-<!--    <app-chart [datasets]="chartDataset" [labels]="chartLabels" [options]="lineOptions" [chartType]="selectedType"></app-chart>-->
-<!--  </div>-->
-
+  </article>
+  <article>
+    <h2 class="title">Financial report of 5 random (not so random) videogames companies</h2>
+    <div class="select">
+      <app-option-selector [symbolList]="symbolList" (selectedSymbol)="onSelectSymbol($event)"></app-option-selector>
+    </div>
+        </article>
 </section>
 

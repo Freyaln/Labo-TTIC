@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {GeneralDatas, ICompanies, ICompaniesResult, PopestiapiService, SummaryDatas} from "./popestiapi.service";
+import {environment} from "../../environments/environment";
+import {ListInterface} from "../components/atoms/link-list/link-list.component";
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +19,21 @@ export class DataHandlingService {
   processedPercentage: Idataset;
   // @ts-ignore
   processedGamesCountDatas: Idataset;
+  links: string[] = [];
+  compagniesListLinks: ListInterface[] = [];
 
 
   constructor(private _popestiapiService: PopestiapiService) {}
 
   randomRGB() {
-    const r = Math.floor(Math.random() * 128);
-    const g = Math.floor(Math.random() * 128);
-    const b = Math.floor(Math.random() * 128);
+    // No fluos output
+    let r = Math.floor(Math.random() * 128);
+    let g = Math.floor(Math.random() * 128);
+    let b = Math.floor(Math.random() * 128);
+    // No grey-ish output
+    if (r === g && g === b) {
+      r += r < 128 ? 1 : -1;
+    }
     return `rgb(${r}, ${g}, ${b})`;
   }
 
@@ -104,6 +113,16 @@ export class DataHandlingService {
       labels: datas.map((i) => i.name)
     };
     return this.processedGamesCountDatas;
+  }
+
+  developersNameIdToLink(datas: ICompaniesResult[]) {
+    this.compagniesListLinks = datas.map((i) => {
+      return {
+        label: i.name,
+        link: `${environment.rawg_url}/developers/${i.id}?key=${environment.rawg_apiKey}`
+      }
+    })
+    return this.compagniesListLinks;
   }
 
   deathsDataHandler(datas: SummaryDatas) {

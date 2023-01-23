@@ -1,16 +1,16 @@
-<section class="general-chart">
-  <h2 class="title">Covid-19 live statistics</h2>
+<!--<section class="general-chart">-->
+<!--  <h2 class="title">Covid-19 live statistics</h2>-->
 
-  <article class="general-options-display">
-    <div class="select">
-      <app-country-selector (selectedCountry)="onSelectCountry($event)"></app-country-selector>
-    </div>
-  </article>
+<!--  <article class="general-options-display">-->
+<!--    <div class="select">-->
+<!--      <app-option-selector (selectedCountry)="onSelectCountry($event)"></app-option-selector>-->
+<!--    </div>-->
+<!--  </article>-->
 
-  <div *ngIf="!isLoaded">
-    <app-loading-spinner></app-loading-spinner>
-  </div>
-  <div *ngIf="isLoaded" class="chart-container">
-    <app-chart [datasets]="liveDataset" [labels]="liveLabels" [options]="lineOptions" [chartType]="'bar'"></app-chart>
-  </div>
-</section>
+<!--  <div *ngIf="!isLoaded">-->
+<!--    <app-loading-spinner></app-loading-spinner>-->
+<!--  </div>-->
+<!--  <div *ngIf="isLoaded" class="chart-container">-->
+<!--    <app-chart [datasets]="liveDataset" [labels]="liveLabels" [options]="lineOptions" [chartType]="'bar'"></app-chart>-->
+<!--  </div>-->
+<!--</section>-->

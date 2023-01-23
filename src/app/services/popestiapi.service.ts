@@ -11,10 +11,6 @@ export class PopestiapiService {
   constructor(private http: HttpClient) {
   }
 
-    getAllCountries() {
-    return this.http.get<Countries[]>('https://api.covid19api.com/countries')
-    }
-
     getAllFromCountry(country: string, dateStart: string, dateEnd: string) {
       return this.http.get<GeneralDatas[]>(`https://api.covid19api.com/country/${country}?from=${dateStart}&to=${dateEnd}`)
     }
@@ -28,12 +24,20 @@ export class PopestiapiService {
     }
 
     getAllCompanies() {
-      return this.http.get<ICompanies>(`${environment.rawg_url}/developers?key=${environment.rawg_apiKey}`)
+      return this.http.get<ICompanies>(`${environment.rawg_url}/developers?key=${environment.rawg_apiKey}&page_size=15`)
     }
 
-  getPage(link: string) {
-    return this.http.get<ICompanies>(`${link}`)
-  }
+    getPage(link: string) {
+      return this.http.get<ICompanies>(`${link}`)
+    }
+
+    getDetails(link: string) {
+    return this.http.get(`${link}`)
+    }
+
+    getAnnualEarnings(symbol: string) {
+    return this.http.get(`https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${environment.alpha_apiKey}`)
+    }
 }
 
 export interface ICompanies {
@@ -73,10 +77,6 @@ export interface GeneralDatas {
   Lon: string,
   Province: string,
   Recovered: number
-}
-
-export interface Countries {
-  Country: string
 }
 
 export interface SummaryGlobal {

@@ -12,7 +12,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgChartsModule} from "ng2-charts";
 import {FormsModule} from "@angular/forms";
 import { SelectComponent } from './components/atoms/select/select.component';
-import { CountrySelectorComponent } from './components/molecules/country-selector/country-selector.component';
+import { OptionSelectorComponent } from './components/molecules/option-selector/option-selector.component';
 import { ChecboxSelectorComponent } from './components/molecules/checbox-selector/checbox-selector.component';
 import { ChartTypeSelectorComponent } from './components/molecules/chart-type-selector/chart-type-selector.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,7 +39,7 @@ import { ListComponent } from './components/atoms/list/list.component';
     HeaderComponent,
     ByCountryComponent,
     SelectComponent,
-    CountrySelectorComponent,
+    OptionSelectorComponent,
     ChecboxSelectorComponent,
     ChartTypeSelectorComponent,
     DatePickerComponent,

@@ -13,6 +13,6 @@ export class NavbarComponent {
     {label: 'By country', link: '/by-country'},
     {label: 'Comparisons charts', link: '/comparisons'},
     {label: 'Live by country', link: '/live-cases'},
-    {label: 'Live by country', link: '/general-infos'}
+    {label: 'General Infos', link: '/general-infos'}
   ];
 }

@@ -8,10 +8,10 @@ import {Component, Input} from '@angular/core';
 export class LinkListComponent {
 
   @Input() itemList : ListInterface[] = [];
-
+  @Input() customClass: string = '';
 }
 
 export interface ListInterface {
   label: string,
-  link: string
+  link?: string
 }

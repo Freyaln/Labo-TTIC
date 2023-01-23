@@ -1,8 +1,18 @@
-.nav-container {
-  display: flex;
-  justify-content: flex-end;
-  background-color: antiquewhite;
-  margin: 0;
-  padding: 0;
 
-}
+:host ::ng-deep app-link-list .list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 95%;
+
+    li {
+      list-style: none;
+      padding-right: 1rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }

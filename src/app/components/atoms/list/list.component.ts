@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -7,7 +7,13 @@ import {Component, Input} from '@angular/core';
 })
 export class ListComponent {
 
-  @Input() itemList :any[] | undefined = [];
+  @Input() itemList :ListInterface[] = [];
   @Input() customClass: string = '';
+  @Output() onClick: EventEmitter<any> = new EventEmitter();
 
+}
+
+export interface ListInterface {
+  label: string,
+  link?: string
 }
