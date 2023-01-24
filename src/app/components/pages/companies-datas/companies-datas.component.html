@@ -2,7 +2,7 @@
   <div class="general-disposition">
   <article>
       <h2 class="title">Games count for shown companies</h2>
-      <app-list [itemList]="developersName" [customClass]="'list'"></app-list>
+      <app-list [itemList]="developersName" [customClass]="'dev-list'"></app-list>
       <div class="button-disposition">
         <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
         <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>

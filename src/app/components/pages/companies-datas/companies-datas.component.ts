@@ -5,11 +5,11 @@ import {DataHandlingService } from "../../../services/data-handling.service";
 import {ISymbol} from "../../molecules/option-selector/option-selector.component";
 
 @Component({
-  selector: 'app-by-country',
-  templateUrl: './by-country.component.html',
-  styleUrls: ['./by-country.component.scss']
+  selector: 'app-companies-datas',
+  templateUrl: './companies-datas.component.html',
+  styleUrls: ['./companies-datascomponent.scss']
 })
-export class ByCountryComponent {
+export class CompaniesDatasComponent {
 
   chartDataset: any;
   chartLabels: any;
@@ -19,10 +19,10 @@ export class ByCountryComponent {
     maintainAspectRatio: true,
     scales: {
       y: {
-        ticks: { color: 'white' }
+        ticks: { color: 'black' }
       },
       x: {
-        ticks: { color: 'white' }
+        ticks: { color: 'black' }
       }
     }
   };
@@ -36,10 +36,10 @@ export class ByCountryComponent {
     },
     scales: {
       y: {
-        ticks: { color: 'white' }
+        ticks: { color: 'black' }
       },
       x: {
-        ticks: { color: 'white' }
+        ticks: { color: 'black' }
       }
     }
   };

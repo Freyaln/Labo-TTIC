@@ -12,18 +12,6 @@ export class PopestiapiService {
   constructor(private http: HttpClient) {
   }
 
-    getAllFromCountry(country: string, dateStart: string, dateEnd: string) {
-      return this.http.get<GeneralDatas[]>(`https://api.covid19api.com/country/${country}?from=${dateStart}&to=${dateEnd}`)
-    }
-
-    getLiveCasesByCountry(country: string, date: string) {
-    return this.http.get<GeneralDatas[]>(`https://api.covid19api.com/live/country/${country}/status/confirmed/date/${date}`)
-    }
-
-    getAllDatas() {
-      return this.http.get<SummaryDatas>(`https://api.covid19api.com/summary`)
-    }
-
     getAllCompanies() {
       return this.http.get<ICompanies>(`${environment.rawg_url}/developers?key=${environment.rawg_apiKey}&page_size=15`)
     }
@@ -62,48 +50,4 @@ export interface IGames {
   id: number,
   name: string,
   slug: string
-}
-
-export interface GeneralDatas {
-  Active: number,
-  City: string,
-  CityCode: string,
-  Confirmed: number,
-  Country: string,
-  CountryCode: string,
-  Date: Date,
-  Deaths: number,
-  ID: string,
-  Lat: string,
-  Lon: string,
-  Province: string,
-  Recovered: number
-}
-
-export interface SummaryGlobal {
-  NewConfirmed: number,
-  TotalConfirmed: number,
-  NewDeaths: number,
-  TotalDeaths: number,
-  NewRecovered: number,
-  TotalRecovered: number,
-  Date: string
-}
-
-export interface SummaryCountry {
-  Country: string,
-  CountryCode: string,
-  Slug: string,
-  NewConfirmed: number,
-  TotalConfirmed: number,
-  NewDeaths: number,
-  TotalDeaths: number,
-  NewRecovered: number,
-  TotalRecovered: number,
-  Date: string
-}
-
-export interface SummaryDatas {
-  Global: SummaryGlobal[],
-  Countries: SummaryCountry[]
 }

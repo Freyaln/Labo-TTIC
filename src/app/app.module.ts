@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/molecules/navbar/navbar.component';
 import { ButtonComponent } from './components/atoms/button/button.component';
 import { SearchBarComponent } from './components/molecules/search-bar/search-bar.component';
 import { HeaderComponent } from './components/organisms/header/header.component';
-import { ByCountryComponent } from './components/pages/by-country/by-country.component';
+import { CompaniesDatasComponent } from './components/pages/companies-datas/companies-datas.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NgChartsModule} from "ng2-charts";
 import {FormsModule} from "@angular/forms";
@@ -22,9 +21,6 @@ import {MatNativeDateModule} from "@angular/material/core";
 import { DatePickerComponent } from './components/molecules/date-picker/date-picker.component';
 import { HomepageComponent } from './components/pages/homepage/homepage.component';
 import { LinkListComponent } from './components/atoms/link-list/link-list.component';
-import { ComparisonsComponent } from './components/pages/comparisons/comparisons.component';
-import { LiveCasesComponent } from './components/pages/live-cases/live-cases.component';
-import { GeneralInfosComponent } from './components/pages/general-infos/general-infos.component';
 import { MainPageComponent } from './components/templates/main-page/main-page.component';
 import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/loading-spinner.component';
 import { ChartComponent } from './components/organisms/chart/chart.component';
@@ -37,7 +33,7 @@ import { ListComponent } from './components/atoms/list/list.component';
     ButtonComponent,
     SearchBarComponent,
     HeaderComponent,
-    ByCountryComponent,
+    CompaniesDatasComponent,
     SelectComponent,
     OptionSelectorComponent,
     ChecboxSelectorComponent,
@@ -45,9 +41,6 @@ import { ListComponent } from './components/atoms/list/list.component';
     DatePickerComponent,
     HomepageComponent,
     LinkListComponent,
-    ComparisonsComponent,
-    LiveCasesComponent,
-    GeneralInfosComponent,
     MainPageComponent,
     LoadingSpinnerComponent,
     ChartComponent,

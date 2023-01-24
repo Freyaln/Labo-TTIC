@@ -10,9 +10,7 @@ export class NavbarComponent {
 
   menuItems: ListInterface[] = [
     {label: 'Home', link: '/homepage'},
-    {label: 'By country', link: '/by-country'},
-    {label: 'Comparisons charts', link: '/comparisons'},
-    {label: 'Live by country', link: '/live-cases'},
-    {label: 'General Infos', link: '/general-infos'}
+    {label: 'Companies', link: '/companies-datas'},
+    {label: 'Games', link: '/games-genre'}
   ];
 }
