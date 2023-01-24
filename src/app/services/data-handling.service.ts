@@ -19,8 +19,16 @@ export class DataHandlingService {
   processedPercentage: Idataset;
   // @ts-ignore
   processedGamesCountDatas: Idataset;
-  links: string[] = [];
-  compagniesListLinks: ListInterface[] = [];
+  // @ts-ignore
+  processedFinancialDatas: Idataset;
+  // @ts-ignore
+  preProcessedAnnualEarningsDatas: IAEarnings;
+  // @ts-ignore
+  processedAnnualEarningsDatas: Idataset;
+  // @ts-ignore
+  preProcessedQuarterlyEarningsDatas: IQEarnings;
+  // @ts-ignore
+  processedQuarterlyEarningsDatas: Idataset;
 
 
   constructor(private _popestiapiService: PopestiapiService) {}
@@ -115,14 +123,46 @@ export class DataHandlingService {
     return this.processedGamesCountDatas;
   }
 
-  developersNameIdToLink(datas: ICompaniesResult[]) {
-    this.compagniesListLinks = datas.map((i) => {
-      return {
-        label: i.name,
-        link: `${environment.rawg_url}/developers/${i.id}?key=${environment.rawg_apiKey}`
-      }
-    })
-    return this.compagniesListLinks;
+  annualEarningsDataHandler(datas: IFinancial) {
+    this.preProcessedAnnualEarningsDatas =  {
+      fiscalDateEnding: datas.annualEarnings.flatMap((i) => i.fiscalDateEnding),
+      reportedEPS: datas.annualEarnings.flatMap((i) => i.reportedEPS)
+    }
+    this.processedAnnualEarningsDatas = {
+      dataset: [{
+        data: this.preProcessedAnnualEarningsDatas.reportedEPS,
+        label: '',
+        backgroundColor: this.randomRGB()
+      }],
+      labels: this.preProcessedAnnualEarningsDatas.fiscalDateEnding
+    }
+    console.log(this.processedAnnualEarningsDatas)
+    return this.processedAnnualEarningsDatas
+  }
+
+  quarterlyEarningsDataHandler(datas: IFinancial) {
+    this.preProcessedQuarterlyEarningsDatas = {
+      fiscalDateEnding: datas.quarterlyEarnings.flatMap((i) => i.fiscalDateEnding),
+      reportedDate: datas.quarterlyEarnings.flatMap((i) => i.reportedDate),
+      reportedEPS: datas.quarterlyEarnings.flatMap((i) => i.reportedEPS),
+      estimatedEPS: datas.quarterlyEarnings.flatMap((i) => i.estimatedEPS),
+      surprise: datas.quarterlyEarnings.flatMap((i) => i.surprise),
+      surprisePercentage: datas.quarterlyEarnings.flatMap((i) => i.surprisePercentage),
+    }
+    this.processedQuarterlyEarningsDatas = {
+      dataset: [{
+        data: this.preProcessedQuarterlyEarningsDatas.reportedEPS,
+        label: 'Reported EPS',
+        backgroundColor: this.randomRGB()
+      },
+        {
+          data: this.preProcessedQuarterlyEarningsDatas.estimatedEPS,
+          label: 'Estimated EPS',
+          backgroundColor: this.randomRGB()
+        }],
+      labels: this.preProcessedQuarterlyEarningsDatas.fiscalDateEnding
+    }
+    return this.processedQuarterlyEarningsDatas;
   }
 
   deathsDataHandler(datas: SummaryDatas) {
@@ -137,7 +177,6 @@ export class DataHandlingService {
       }],
       labels: preDatas.map((i) => i.Country)
     }
-    console.log(this.processedDeathDatas)
     return this.processedDeathDatas;
 
     // Un-optimized way
@@ -163,6 +202,26 @@ export class DataHandlingService {
     // return this.processedDeathDatas;
   }
 }
+
+export interface IFinancial {
+  annualEarnings: IAEarnings[],
+  quarterlyEarnings: IQEarnings[]
+}
+
+export interface IAEarnings {
+  fiscalDateEnding: string[],
+  reportedEPS: number[]
+}
+
+export interface IQEarnings {
+  fiscalDateEnding: string[],
+  reportedDate: string[],
+  reportedEPS: number[],
+  estimatedEPS: number[],
+  surprise: string[],
+  surprisePercentage: string[]
+}
+
 export interface IDataLabelColors {
   data: number[],
   label: string | string[],

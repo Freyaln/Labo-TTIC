@@ -1,27 +1,39 @@
 <section class="general-chart">
+  <div class="general-disposition">
   <article>
-    <h2 class="title">Games count for shown companies</h2>
-
-    <div class="general-disposition">
-      <app-list [itemList]="developersNameId" [customClass]="'list'"></app-list>
+      <h2 class="title">Games count for shown companies</h2>
+      <app-list [itemList]="developersName" [customClass]="'list'"></app-list>
       <div class="button-disposition">
         <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
         <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>
       </div>
-    </div>
 
-    <div *ngIf="!isLoaded">
+    <div *ngIf="!isDevsLoaded">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <div *ngIf="isLoaded"  class="chart-container">
-      <app-chart [datasets]="gamesDataset" [labels]="gamesLabels" [options]="gamesOptions" [chartType]="selectedType"></app-chart>
+    <div *ngIf="isDevsLoaded">
+      <app-chart [datasets]="gamesDataset" [labels]="gamesLabels" [options]="optionsWithoutDisplay" [chartType]="selectedType"></app-chart>
     </div>
   </article>
   <article>
-    <h2 class="title">Financial report of 5 random (not so random) videogames companies</h2>
+    <h2 class="title">Financial report of (not so random) videogames companies</h2>
     <div class="select">
       <app-option-selector [symbolList]="symbolList" (selectedSymbol)="onSelectSymbol($event)"></app-option-selector>
     </div>
-        </article>
+    <h3 class="subtitle">Annual benefits report since the start of the company</h3>
+    <div *ngIf="!isYearlyLoaded">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="isYearlyLoaded">
+      <app-chart [datasets]="annualDataset" [labels]="annualLabels" [options]="optionsWithoutDisplay" [chartType]="selectedType"></app-chart>
+    </div>
+    <div *ngIf="!isQuarterlyLoaded">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="isQuarterlyLoaded">
+      <app-chart [datasets]="quarterlyDataset" [labels]="quarterlyLabels" [options]="optionsWithDisplay" [chartType]="'line'"></app-chart>
+    </div>
+  </article>
+  </div>
 </section>
 

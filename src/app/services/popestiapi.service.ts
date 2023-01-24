@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
+import {IFinancial} from "./data-handling.service";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class PopestiapiService {
     }
 
     getAnnualEarnings(symbol: string) {
-    return this.http.get(`https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${environment.alpha_apiKey}`)
+    return this.http.get<IFinancial>(`https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${environment.alpha_apiKey}`)
     }
 }
 

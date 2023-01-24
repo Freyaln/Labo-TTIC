@@ -1,15 +1,7 @@
 .general-chart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: block;
   width: 100%;
   max-height: 100%;
-  gap: 3rem;
-}
-.general-chart .title {
-  margin-top: 3rem;
-  font-size: 2.5rem;
 }
 .general-chart .general-disposition {
   display: flex;
@@ -17,15 +9,22 @@
   justify-content: center;
   align-items: center;
 }
+.general-chart .general-disposition .title {
+  margin-top: 5rem;
+  font-size: 2.5rem;
+  text-align: center;
+}
+.general-chart .general-disposition .subtitle {
+  font-size: 1.5rem;
+  text-decoration: underline white;
+  text-underline-offset: 0.5rem;
+}
 .general-chart .general-disposition .button-disposition {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
-}
-.general-chart .chart-container {
-  margin: 0 auto;
-  width: 80%;
-  height: auto;
 }
 
 :host ::ng-deep app-list .list {
@@ -35,6 +34,7 @@
   flex-wrap: wrap;
   list-style: none;
   width: 100%;
+  margin-top: 2rem;
 }
 
 :host ::ng-deep app-button .button {
