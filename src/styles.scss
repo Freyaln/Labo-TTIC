@@ -65,6 +65,36 @@ body {
     justify-content: center;
     align-items: center;
 
+    .select-block {
+      display: flex;
+      align-items: flex-start;
+
+      & select {
+        border: 1px solid #333;
+        border-radius: 0.25em;
+        width: auto;
+        height: 1.5rem;
+        background-color: #e8e8e8;
+        color: #090909;
+
+        &:focus {
+          border-color: #009087;
+          outline: none;
+        }
+
+        & option {
+          background-color: #e8e8e8;
+          color: #090909;
+        }
+      }
+    }
+
+    .company-block {
+      .company-name {
+        font-weight: bold;
+      }
+    }
+
     .chart-container {
       display: flex;
       justify-content: center;

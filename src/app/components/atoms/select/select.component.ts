@@ -15,7 +15,6 @@ export class SelectComponent {
 
   onSelectValue() {
     this.selectedValueChange.emit(this.selectedValue);
-    console.log(this.selectedValue)
   }
 }
 

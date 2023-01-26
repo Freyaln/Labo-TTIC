@@ -14,35 +14,8 @@ export class CompaniesDatasComponent {
   chartDataset: any;
   chartLabels: any;
   selectedType: ChartType = 'bar';
-  optionsWithDisplay: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      y: {
-        ticks: { color: 'black' }
-      },
-      x: {
-        ticks: { color: 'black' }
-      }
-    }
-  };
-  optionsWithoutDisplay: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-    scales: {
-      y: {
-        ticks: { color: 'black' }
-      },
-      x: {
-        ticks: { color: 'black' }
-      }
-    }
-  };
+  optionsWithDisplay: ChartOptions = {};
+  optionsWithoutDisplay: ChartOptions = {}
 
   isDevsLoaded: boolean = false;
   isYearlyLoaded: boolean = false;
@@ -93,6 +66,23 @@ export class CompaniesDatasComponent {
         this.gamesDataset = this.gamesCountDatas.dataset;
         this.gamesLabels = this.gamesCountDatas.labels;
         this.nextPage = data.next!;
+        this.optionsWithoutDisplay = {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          y: {
+            ticks: { color: 'black' }
+          },
+          x: {
+            ticks: { color: 'black' }
+          }
+        }
+      };
       },
       error: (err) => {
         console.log(err.status);
@@ -105,10 +95,42 @@ export class CompaniesDatasComponent {
       this.annualEarnings = this._dataHandlingService.annualEarningsDataHandler(data);
       this.annualDataset = this.annualEarnings.dataset;
       this.annualLabels = this.annualEarnings.labels;
+      this.optionsWithoutDisplay = {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+          scales: {
+            y: {
+              ticks: { color: 'black' }
+            },
+            x: {
+              ticks: { color: 'black' }
+            }
+          }
+      };
       this.isQuarterlyLoaded = true;
       this.quarterlyEarnings = this._dataHandlingService.quarterlyEarningsDataHandler(data);
       this.quarterlyDataset = this.quarterlyEarnings.dataset;
       this.quarterlyLabels = this.quarterlyEarnings.labels;
+      this.optionsWithDisplay = {
+        responsive: true,
+        maintainAspectRatio: true,
+        backgroundColor: this.quarterlyDataset.backgroundColor,
+        scales: {
+          y: {
+            ticks: { color: 'black' },
+            stacked: true,
+          },
+          x: {
+            ticks: { color: 'black' },
+            stacked: true,
+          }
+        }
+      };
     }
   })
   }
@@ -148,5 +170,12 @@ export class CompaniesDatasComponent {
         this.quarterlyLabels = this.quarterlyEarnings.labels;
       }
     })
+  }
+
+  onChangeChartType(type: string) {
+    console.log(type)
+    type === 'Line' ? this.selectedType = 'line' : null;
+    type === 'Bar' ? this.selectedType = 'bar' : null;
+    return this.selectedType;
   }
 }

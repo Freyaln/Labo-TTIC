@@ -35,6 +35,16 @@ export class DataHandlingService {
     }
     return `rgb(${r}, ${g}, ${b})`;
   }
+  randomRGBa() {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    // No grey-ish output
+    if (r === g && g === b) {
+      r += r < 128 ? 1 : -1;
+    }
+    return `rgb(${r}, ${g}, ${b}, 0.3)`;
+  }
 
   percentageDeathsToConfirmedHandler(deathsDatas: any, confirmedDatas: any) {
     let percentage: IPercent[] = [];
@@ -87,7 +97,6 @@ export class DataHandlingService {
       }],
       labels: this.preProcessedAnnualEarningsDatas.fiscalDateEnding
     }
-    console.log(this.processedAnnualEarningsDatas)
     return this.processedAnnualEarningsDatas
   }
 
@@ -104,12 +113,16 @@ export class DataHandlingService {
       dataset: [{
         data: this.preProcessedQuarterlyEarningsDatas.reportedEPS,
         label: 'Reported EPS',
-        backgroundColor: this.randomRGB()
+        backgroundColor: this.randomRGB(),
+        borderColor: this.randomRGB(),
+        fill: true,
       },
         {
           data: this.preProcessedQuarterlyEarningsDatas.estimatedEPS,
           label: 'Estimated EPS',
-          backgroundColor: this.randomRGB()
+          backgroundColor: this.randomRGB(),
+          borderColor: this.randomRGB(),
+          fill: true,
         }],
       labels: this.preProcessedQuarterlyEarningsDatas.fiscalDateEnding
     }
@@ -140,7 +153,8 @@ export interface IDataLabelColors {
   data: number[],
   label: string | string[],
   backgroundColor?: string | string[],
-  borderColor?: string
+  borderColor?: string,
+  fill?: boolean
 }
 
 export interface Idataset {

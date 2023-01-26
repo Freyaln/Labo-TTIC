@@ -1,8 +1,10 @@
 <section class="general-chart">
   <div class="general-disposition">
-  <article>
+  <article class="company-block">
       <h2 class="title">Games count for shown companies</h2>
-      <app-list [itemList]="developersName" [customClass]="'dev-list'"></app-list>
+      <h3>In this chart you'll be able to see the total of games (DLC included) that several (hundreds) companies have produce.</h3>
+      <p>I personally find it really interesting because it's clearly displaying that <q>success</q> or <q>wealth</q> is not only a quantity matter but also - or more like above everything else - a quality matter</p>
+
       <div class="button-disposition">
         <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
         <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>
@@ -12,7 +14,7 @@
       <app-loading-spinner></app-loading-spinner>
     </div>
     <div *ngIf="isDevsLoaded">
-      <app-chart [datasets]="gamesDataset" [labels]="gamesLabels" [options]="optionsWithoutDisplay" [chartType]="selectedType"></app-chart>
+      <app-chart [datasets]="gamesDataset" [labels]="gamesLabels" [options]="optionsWithoutDisplay" [chartType]="'bar'"></app-chart>
     </div>
   </article>
   <article>
@@ -20,18 +22,20 @@
     <div class="select">
       <app-option-selector [symbolList]="symbolList" (selectedSymbol)="onSelectSymbol($event)"></app-option-selector>
     </div>
-    <h3 class="subtitle">Annual benefits report since the start of the company</h3>
+    <h3 class="subtitle">Annual earning per share (EPS) report since the start of the company</h3>
     <div *ngIf="!isYearlyLoaded">
       <app-loading-spinner></app-loading-spinner>
     </div>
     <div *ngIf="isYearlyLoaded">
-      <app-chart [datasets]="annualDataset" [labels]="annualLabels" [options]="optionsWithoutDisplay" [chartType]="selectedType"></app-chart>
+      <app-chart [datasets]="annualDataset" [labels]="annualLabels" [options]="optionsWithoutDisplay" [chartType]="'bar'"></app-chart>
     </div>
+    <h3 class="subtitle">Quarterly earning per share (EPS) report since the start of the company</h3>
+    <app-chart-type-selector (selectedType)="onChangeChartType($event)"></app-chart-type-selector>
     <div *ngIf="!isQuarterlyLoaded">
       <app-loading-spinner></app-loading-spinner>
     </div>
     <div *ngIf="isQuarterlyLoaded">
-      <app-chart [datasets]="quarterlyDataset" [labels]="quarterlyLabels" [options]="optionsWithDisplay" [chartType]="'line'"></app-chart>
+      <app-chart [datasets]="quarterlyDataset" [labels]="quarterlyLabels" [options]="optionsWithDisplay" [chartType]="selectedType"></app-chart>
     </div>
   </article>
   </div>

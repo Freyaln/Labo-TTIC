@@ -59,6 +59,29 @@ body {
   justify-content: center;
   align-items: center;
 }
+.general-chart .general-disposition .select-block {
+  display: flex;
+  align-items: flex-start;
+}
+.general-chart .general-disposition .select-block select {
+  border: 1px solid #333;
+  border-radius: 0.25em;
+  width: auto;
+  height: 1.5rem;
+  background-color: #e8e8e8;
+  color: #090909;
+}
+.general-chart .general-disposition .select-block select:focus {
+  border-color: #009087;
+  outline: none;
+}
+.general-chart .general-disposition .select-block select option {
+  background-color: #e8e8e8;
+  color: #090909;
+}
+.general-chart .general-disposition .company-block .company-name {
+  font-weight: bold;
+}
 .general-chart .general-disposition .chart-container {
   display: flex;
   justify-content: center;
