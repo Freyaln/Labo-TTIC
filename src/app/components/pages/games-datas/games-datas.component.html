@@ -1,0 +1,17 @@
+<section class="chart">
+  <div class="general-disposition">
+<div *ngIf="!gamesIsLoaded">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="gamesIsLoaded">
+<app-chart [datasets]="genreDataset" [labels]="genreLabels" [options]="gamesChartOptions" [chartType]="'pie'"></app-chart>
+</div>
+
+    <div *ngIf="!gamesIsLoaded">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="gamesIsLoaded">
+      <app-chart [datasets]="genresAverageDataset" [labels]="genresAverageLabels" [options]="gamesAverageOptions" [chartType]="'bar'"></app-chart>
+    </div>
+  </div>
+</section>

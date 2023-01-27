@@ -59,7 +59,7 @@ export class DataHandlingService {
 
       this.processedPercentage = {
         dataset: [{
-          data: percentages.sort((a, b) => b -a),
+          data: percentages.sort((a, b) => b - a),
           label: 'Total games percentage',
           backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
           borderColor: datas.map((i) => this.randomRGB())
