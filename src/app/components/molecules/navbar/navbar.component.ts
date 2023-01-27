@@ -11,6 +11,6 @@ export class NavbarComponent {
   menuItems: ListInterface[] = [
     {label: 'Home', link: '/homepage'},
     {label: 'Companies', link: '/companies-datas'},
-    {label: 'Games', link: '/games-genre'}
+    {label: 'Games', link: '/games-datas'}
   ];
 }

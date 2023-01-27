@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ICompaniesResult, PopestiapiService} from "./popestiapi.service";
+import {ICompaniesResult, IGamesGenres, IGenreRequest, PopestiapiService} from "./popestiapi.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class DataHandlingService {
   preProcessedQuarterlyEarningsDatas: IQEarnings;
   // @ts-ignore
   processedQuarterlyEarningsDatas: Idataset;
+  // @ts-ignore
+  processedGamesGenresDatas: Idataset;
 
 
   constructor(private _popestiapiService: PopestiapiService) {}
@@ -35,40 +37,35 @@ export class DataHandlingService {
     }
     return `rgb(${r}, ${g}, ${b})`;
   }
-  randomRGBa() {
-    let r = Math.floor(Math.random() * 256);
-    let g = Math.floor(Math.random() * 256);
-    let b = Math.floor(Math.random() * 256);
+  randomRGBa(transparency: string) {
+    let r = Math.floor(Math.random() * 192);
+    let g = Math.floor(Math.random() * 192);
+    let b = Math.floor(Math.random() * 192);
     // No grey-ish output
     if (r === g && g === b) {
       r += r < 128 ? 1 : -1;
     }
-    return `rgb(${r}, ${g}, ${b}, 0.3)`;
+    return `rgb(${r}, ${g}, ${b}, ${transparency})`;
   }
 
-  percentageDeathsToConfirmedHandler(deathsDatas: any, confirmedDatas: any) {
-    let percentage: IPercent[] = [];
-    for (let i = 0; i < deathsDatas.labels.length; i++) {
-      let country = deathsDatas.labels[i]
-      let confirmedIndex = confirmedDatas.labels.indexOf(country);
-      if(confirmedIndex !== -1) {
-        let deaths = deathsDatas.dataset[0].data[i];
-        let confirmed = confirmedDatas.dataset[0].data[confirmedIndex];
-        let percent: number = (deaths/confirmed)*100
-        percentage.push({
-          Country: country,
-          PercentageOfDeath: percent
-        })
-        this.processedPercentage = {
-          dataset: [{
-            data: percentage.map((i) => i.PercentageOfDeath),
-            label: 'Percentage of deaths to confirmed case in top 100k countries',
-            backgroundColor: percentage.map((i) => this.randomRGB())
-          }],
-          labels: percentage.map((i) => i.Country)
-        }
-      }
-    }
+  percentageGamesbyGenreDataHandler(datas: IGamesGenres[]) {
+    const totalCount = datas.reduce((acc, genre) => acc + genre.games_count, 0);
+    const averageCount = totalCount / datas.length;
+    let percentages: number[] = []
+    datas.forEach(genre => {
+      const percentage = (genre.games_count / totalCount) * 100;
+      percentages.push(+percentage.toFixed(2))
+    }),
+
+      this.processedPercentage = {
+        dataset: [{
+          data: percentages.sort((a, b) => b -a),
+          label: 'Total games percentage',
+          backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+          borderColor: datas.map((i) => this.randomRGB())
+        }],
+        labels: datas.map((i) => i.name)
+      };
     return this.processedPercentage;
   }
 
@@ -82,6 +79,19 @@ export class DataHandlingService {
       labels: datas.map((i) => i.name)
     };
     return this.processedGamesCountDatas;
+  }
+
+  gamesGenreDataHandler(datas: IGamesGenres[]) {
+    this.processedGamesGenresDatas = {
+      dataset: [{
+        data: datas.map((i) => i.games_count),
+        label: 'Total games',
+        backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+        borderColor: datas.map((i) => this.randomRGB())
+      }],
+      labels: datas.map((i) => i.name)
+    };
+    return this.processedGamesGenresDatas;
   }
 
   annualEarningsDataHandler(datas: IFinancial) {
@@ -153,7 +163,7 @@ export interface IDataLabelColors {
   data: number[],
   label: string | string[],
   backgroundColor?: string | string[],
-  borderColor?: string,
+  borderColor?: string | string[],
   fill?: boolean
 }
 

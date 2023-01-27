@@ -69,20 +69,7 @@ export class CompaniesDatasComponent {
         this.optionsWithoutDisplay = {
           responsive: true,
           maintainAspectRatio: true,
-          plugins: {
-          legend: {
-            display: false,
-          },
-        },
-        scales: {
-          y: {
-            ticks: { color: 'black' }
-          },
-          x: {
-            ticks: { color: 'black' }
-          }
-        }
-      };
+        };
       },
       error: (err) => {
         console.log(err.status);

@@ -1,5 +1,6 @@
 <ng-container *ngIf="type === 'symbol'">
   <select [(ngModel)]="selectedValue" (change)="onSelectValue()">
+    <option value="">Select</option>
     <option *ngFor="let option of optionsList">{{option.cName}}</option>
   </select>
 </ng-container>

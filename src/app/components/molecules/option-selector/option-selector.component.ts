@@ -10,7 +10,7 @@ export class OptionSelectorComponent {
   @Input() symbolList: ISymbol[] = [];
   @Output() selectedSymbol = new EventEmitter<any>();
 
-  symbol: string = ''
+  symbol: string = '';
 
   constructor() {
 

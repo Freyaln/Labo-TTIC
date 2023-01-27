@@ -25,6 +25,7 @@ import { MainPageComponent } from './components/templates/main-page/main-page.co
 import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/loading-spinner.component';
 import { ChartComponent } from './components/organisms/chart/chart.component';
 import { ListComponent } from './components/atoms/list/list.component';
+import { GamesDatasComponent } from './components/pages/games-datas/games-datas.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ListComponent } from './components/atoms/list/list.component';
     LoadingSpinnerComponent,
     ChartComponent,
     ListComponent,
+    GamesDatasComponent,
   ],
   imports: [
     BrowserModule,

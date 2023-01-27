@@ -24,6 +24,10 @@ export class PopestiapiService {
     return this.http.get(`${link}`)
     }
 
+    getAllGenres() {
+    return this.http.get<IGenreRequest>(`${environment.rawg_url}/genres?key=${environment.rawg_apiKey}`)
+    }
+
     getAnnualEarnings(symbol: string) {
     return this.http.get<IFinancial>(`https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${environment.alpha_apiKey}`)
     }
@@ -50,4 +54,18 @@ export interface IGames {
   id: number,
   name: string,
   slug: string
+}
+
+export interface IGenreRequest {
+  count: number,
+  results: IGamesGenres[]
+}
+
+export interface IGamesGenres {
+  id: number,
+  name: string,
+  slug: string,
+  games: IGames[],
+  games_count: number,
+  image_background: string,
 }

@@ -19,7 +19,7 @@ body {
 }
 .main-layout .header-layout .sidebar {
   background-color: #333;
-  width: 20%;
+  width: 10%;
   height: 100%;
   position: fixed;
   top: 0;
@@ -48,22 +48,22 @@ body {
   background-color: #555;
 }
 
-.general-chart {
+.chart {
   width: 80%;
   max-height: 100%;
   margin-left: 15%;
 }
-.general-chart .general-disposition {
+.chart .general-disposition {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.general-chart .general-disposition .select-block {
+.chart .general-disposition .select-block {
   display: flex;
   align-items: flex-start;
 }
-.general-chart .general-disposition .select-block select {
+.chart .general-disposition .select-block select {
   border: 1px solid #333;
   border-radius: 0.25em;
   width: auto;
@@ -71,18 +71,18 @@ body {
   background-color: #e8e8e8;
   color: #090909;
 }
-.general-chart .general-disposition .select-block select:focus {
+.chart .general-disposition .select-block select:focus {
   border-color: #009087;
   outline: none;
 }
-.general-chart .general-disposition .select-block select option {
+.chart .general-disposition .select-block select option {
   background-color: #e8e8e8;
   color: #090909;
 }
-.general-chart .general-disposition .company-block .company-name {
+.chart .general-disposition .company-block .company-name {
   font-weight: bold;
 }
-.general-chart .general-disposition .chart-container {
+.chart .general-disposition .chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,11 +94,11 @@ body {
   height: auto;
   background-color: #c4c4c4;
 }
-.general-chart .general-disposition .chart-container canvas {
+.chart .general-disposition .chart-container canvas {
   width: 60rem;
   height: auto;
 }
-.general-chart .general-disposition .dev-list {
+.chart .general-disposition .dev-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -108,24 +108,24 @@ body {
   width: 75%;
   margin: 3rem auto 1.5rem;
 }
-.general-chart .general-disposition .title {
+.chart .general-disposition .title {
   margin-top: 5rem;
   font-size: 2.5rem;
   text-align: center;
 }
-.general-chart .general-disposition .subtitle {
+.chart .general-disposition .subtitle {
   font-size: 1.5rem;
   text-decoration: underline white;
   text-underline-offset: 0.5rem;
 }
-.general-chart .general-disposition .button-disposition {
+.chart .general-disposition .button-disposition {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 }
-.general-chart .general-disposition .button-disposition .button {
+.chart .general-disposition .button-disposition .button {
   display: inline-block;
   transition: all 0.2s ease-in;
   position: relative;
@@ -138,11 +138,11 @@ body {
   background: #e8e8e8;
   border: 1px solid #e8e8e8;
 }
-.general-chart .general-disposition .button-disposition .button:active {
+.chart .general-disposition .button-disposition .button:active {
   color: #666;
   box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
 }
-.general-chart .general-disposition .button-disposition .button:before {
+.chart .general-disposition .button-disposition .button:before {
   content: "";
   position: absolute;
   left: 50%;
@@ -156,7 +156,7 @@ body {
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
 }
-.general-chart .general-disposition .button-disposition .button:after {
+.chart .general-disposition .button-disposition .button:after {
   content: "";
   position: absolute;
   left: 55%;
@@ -170,16 +170,16 @@ body {
   transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
   z-index: -1;
 }
-.general-chart .general-disposition .button-disposition .button:hover {
+.chart .general-disposition .button-disposition .button:hover {
   color: #ffffff;
   border: 1px solid #009087;
 }
-.general-chart .general-disposition .button-disposition .button:hover:before {
+.chart .general-disposition .button-disposition .button:hover:before {
   top: -35%;
   background-color: #009087;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
 }
-.general-chart .general-disposition .button-disposition .button:hover:after {
+.chart .general-disposition .button-disposition .button:hover:after {
   top: -45%;
   background-color: #009087;
   transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
