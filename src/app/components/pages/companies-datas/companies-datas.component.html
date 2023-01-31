@@ -44,10 +44,7 @@
     <article class="company-block">
       <h2 class="title">Games by platform</h2>
       <div class="button-disposition">
-        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('4')" children="PC"></app-button>
-        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('187')" children="Playstation 5"></app-button>
-        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('18')" children="Playstation 4"></app-button>
-        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('1')" children="Xbox One"></app-button>
+        <app-button-list [buttonList]="developersPlatforms" [customClass]="'button'" [onClickEvent]="getGamesByPlatform.bind(this)"></app-button-list>
       </div>
       <div class="button-disposition">
         <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPageFromGames(previousPage)" children="Previous page"></app-button>

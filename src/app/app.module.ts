@@ -26,6 +26,7 @@ import { LoadingSpinnerComponent } from './components/atoms/loading-spinner/load
 import { ChartComponent } from './components/organisms/chart/chart.component';
 import { ListComponent } from './components/atoms/list/list.component';
 import { GamesDatasComponent } from './components/pages/games-datas/games-datas.component';
+import { ButtonListComponent } from './components/molecules/button-list/button-list.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GamesDatasComponent } from './components/pages/games-datas/games-datas.
     ChartComponent,
     ListComponent,
     GamesDatasComponent,
+    ButtonListComponent,
   ],
   imports: [
     BrowserModule,

@@ -164,5 +164,9 @@ export interface IGamesData {
   next: string,
   previous: string,
   results: IGamesDataResult[]
+}
 
+export interface IButtonPlatform {
+  label: string,
+  id: string
 }

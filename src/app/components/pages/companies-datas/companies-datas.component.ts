@@ -4,7 +4,7 @@ import {FetchingService} from "../../../services/fetching.service";
 import {DataHandlingService } from "../../../services/data-handling.service";
 import {ISymbol} from "../../molecules/option-selector/option-selector.component";
 import {ListInterface} from "../../atoms/link-list/link-list.component";
-import {ICompaniesResult} from "../../../interfaces/interfaces";
+import {IButtonPlatform, ICompaniesResult} from "../../../interfaces/interfaces";
 
 @Component({
   selector: 'app-companies-datas',
@@ -32,9 +32,17 @@ export class CompaniesDatasComponent {
   developersGamesDataset: any;
   developersGamesLabels: any;
   developersGamesByPlatform: any[] = [];
+  developersPlatforms: IButtonPlatform[] = [
+    {label: 'PC', id: '4'},
+    {label: 'Playstation 5', id: '187'},
+    {label: 'Playstation 4', id: '18'},
+    {label: 'Xbox-One', id: '1'},
+  ]
+
   gamesCountDatas: any;
   gamesDataset: any;
   gamesLabels: any;
+
   nextPage: string = '';
   previousPage: string | null= '';
   symbol: string = '';
