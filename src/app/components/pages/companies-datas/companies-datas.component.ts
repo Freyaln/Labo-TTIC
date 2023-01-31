@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
 import {ChartOptions, ChartType} from 'chart.js';
-import {ICompaniesResult, PopestiapiService} from "../../../services/popestiapi.service";
+import {FetchingService} from "../../../services/fetching.service";
 import {DataHandlingService } from "../../../services/data-handling.service";
 import {ISymbol} from "../../molecules/option-selector/option-selector.component";
+import {ListInterface} from "../../atoms/link-list/link-list.component";
+import {ICompaniesResult} from "../../../interfaces/interfaces";
 
 @Component({
   selector: 'app-companies-datas',
@@ -15,14 +17,21 @@ export class CompaniesDatasComponent {
   chartLabels: any;
   selectedType: ChartType = 'bar';
   optionsWithDisplay: ChartOptions = {};
-  optionsWithoutDisplay: ChartOptions = {}
+  optionsWithoutDisplay: ChartOptions = {};
+  gamesFromCompany: ChartOptions = {};
 
   isDevsLoaded: boolean = false;
   isYearlyLoaded: boolean = false;
   isQuarterlyLoaded: boolean = false;
 
   developers: ICompaniesResult[] = [];
-  developersName: string[] = [];
+  developersNameAndId: ListInterface[] = [];
+  // @ts-ignore
+  developersGames: any;
+  developersId: string = '';
+  developersGamesDataset: any;
+  developersGamesLabels: any;
+  developersGamesByPlatform: any[] = [];
   gamesCountDatas: any;
   gamesDataset: any;
   gamesLabels: any;
@@ -55,13 +64,17 @@ export class CompaniesDatasComponent {
     },
   ]
 
-  constructor(private _popestiapiService: PopestiapiService, private _dataHandlingService: DataHandlingService) {
+  constructor(private _fetchingService: FetchingService, private _dataHandlingService: DataHandlingService) {
 
-    this._popestiapiService.getAllCompanies().subscribe({
+    this._fetchingService.getAllCompanies().subscribe({
       next: (data) => {
         this.isDevsLoaded = true;
         this.developers = data.results;
-        this.developersName = data.results.map((i) => i.name);
+        this.developersNameAndId = data.results.map((i) => {
+          return {
+          label: i.name,
+          link: i.id.toString()
+          }});
         this.gamesCountDatas = this._dataHandlingService.gamesCountDataHandler(data.results);
         this.gamesDataset = this.gamesCountDatas.dataset;
         this.gamesLabels = this.gamesCountDatas.labels;
@@ -76,7 +89,7 @@ export class CompaniesDatasComponent {
       }
     })
 
-    this._popestiapiService.getAnnualEarnings('ATVI').subscribe({
+    this._fetchingService.getAnnualEarnings('ATVI').subscribe({
       next: (data) => {
       this.isYearlyLoaded = true;
       this.annualEarnings = this._dataHandlingService.annualEarningsDataHandler(data);
@@ -123,11 +136,15 @@ export class CompaniesDatasComponent {
   }
 
   getNewPage(next: string) {
-    this._popestiapiService.getPage(next).subscribe({
+    this._fetchingService.getPage(next).subscribe({
       next: (data) => {
         this.isDevsLoaded = true;
         this.developers = data.results;
-        this.developersName = data.results.map((i) => i.name);
+        this.developersNameAndId = data.results.map((i) => {
+          return {
+            label: i.name,
+            link: i.id.toString()
+          }});
         this.gamesCountDatas = this._dataHandlingService.gamesCountDataHandler(data.results);
         this.gamesDataset = this.gamesCountDatas.dataset;
         this.gamesLabels = this.gamesCountDatas.labels;
@@ -145,7 +162,7 @@ export class CompaniesDatasComponent {
     target === 'Electronic Arts' ? this.symbol = 'EA' : null;
     target === 'SONY Corporation' ? this.symbol = 'SONY' : null;
     target === 'Take-Two Interactive Software Inc (2K games)' ? this.symbol = 'TTWO' : null;
-    this._popestiapiService.getAnnualEarnings(this.symbol).subscribe({
+    this._fetchingService.getAnnualEarnings(this.symbol).subscribe({
       next: (data) => {
         this.isYearlyLoaded = true;
         this.annualEarnings = this._dataHandlingService.annualEarningsDataHandler(data);
@@ -160,9 +177,73 @@ export class CompaniesDatasComponent {
   }
 
   onChangeChartType(type: string) {
-    console.log(type)
     type === 'Line' ? this.selectedType = 'line' : null;
     type === 'Bar' ? this.selectedType = 'bar' : null;
     return this.selectedType;
+  }
+
+  getIdToFetchGames(id: string) {
+    this._fetchingService.getGamesFromCompany(id).subscribe({
+      next: (data) => {
+        this.isDevsLoaded = true;
+        this.developersId = id;
+        this.developersGames = this._dataHandlingService.gamesFromCompanyDataHandler(data.results);
+        this.developersGamesDataset = this.developersGames.dataset;
+        this.developersGamesLabels = this.developersGames.labels;
+        this.nextPage = data.next!;
+        this.gamesFromCompany = {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          scales: {
+            y: {
+              ticks: { color: 'black' },
+              stacked: true,
+            },
+            x: {
+              ticks: { color: 'black' },
+              stacked: true,
+            }
+          }
+        }
+      }
+    })
+  }
+
+  getNewPageFromGames(next: string) {
+    this._fetchingService.getPageFromGames(next).subscribe({
+      next: (data) => {
+        this.isDevsLoaded = true;
+        this.developersGames = this._dataHandlingService.gamesFromCompanyDataHandler(data.results);
+        this.developersGamesDataset = this.developersGames.dataset;
+        this.developersGamesLabels = this.developersGames.labels;
+        this.nextPage = data.next;
+        data.previous != null ? this.previousPage = data.previous : null;
+      },
+      error: (err) => {
+        console.log(err.status);
+      }
+    })
+  }
+
+  getGamesByPlatform(platform: string) {
+    this._fetchingService.getByPlatform(this.developersId, platform).subscribe({
+      next: (data) => {
+        this.isDevsLoaded = true;
+        this.developersGames = this._dataHandlingService.gamesFromCompanyDataHandler(data.results);
+        this.developersGamesDataset = this.developersGames.dataset;
+        this.developersGamesLabels = this.developersGames.labels;
+        this.nextPage = data.next;
+        data.previous != null ? this.previousPage = data.previous : null;
+      },
+      error: (err) => {
+        console.log(err.status);
+      }
+    })
   }
 }

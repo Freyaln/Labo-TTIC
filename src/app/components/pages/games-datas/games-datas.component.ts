@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {IGamesGenres, PopestiapiService} from "../../../services/popestiapi.service";
-import {DataHandlingService, Idataset} from "../../../services/data-handling.service";
+import {FetchingService} from "../../../services/fetching.service";
+import {DataHandlingService} from "../../../services/data-handling.service";
 
 @Component({
   selector: 'app-games-datas',
@@ -19,9 +19,9 @@ export class GamesDatasComponent {
   genresAverageLabels: any;
   gamesAverageOptions: any;
 
-  constructor(private _popestiapiService : PopestiapiService, private _dataHandlingService: DataHandlingService) {
+  constructor(private _fetchingService : FetchingService, private _dataHandlingService: DataHandlingService) {
 
-    this._popestiapiService.getAllGenres().subscribe({
+    this._fetchingService.getAllGenres().subscribe({
       next: (data) => {
         console.log(data)
         this.gamesIsLoaded = true;

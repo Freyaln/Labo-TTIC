@@ -1,10 +1,10 @@
 <section class="chart">
-  <div class="general-disposition">
+  <div class="general-disposition" *ngIf="!developersGames">
   <article class="company-block">
       <h2 class="title">Games count for shown companies</h2>
       <h3>In this chart you'll be able to see the total of games (DLC included) that several (hundreds) companies have produce.</h3>
       <p>I personally find it really interesting because it's clearly displaying that <q>success</q> or <q>wealth</q> is not only a quantity matter but also - or more like above everything else - a quality matter</p>
-
+      <app-link-list [customClass]="'dev-list'" [itemList]="developersNameAndId" (onClick)="getIdToFetchGames($event)" [id]="true"></app-link-list>
       <div class="button-disposition">
         <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPage(previousPage)" children="Previous page"></app-button>
         <app-button [customClass]="'button'" (onClick)="getNewPage(nextPage)" children="Next page"></app-button>
@@ -38,6 +38,29 @@
       <app-chart [datasets]="quarterlyDataset" [labels]="quarterlyLabels" [options]="optionsWithDisplay" [chartType]="selectedType"></app-chart>
     </div>
   </article>
+  </div>
+
+  <div class="general-disposition" *ngIf="developersGames">
+    <article class="company-block">
+      <h2 class="title">Games by platform</h2>
+      <div class="button-disposition">
+        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('4')" children="PC"></app-button>
+        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('187')" children="Playstation 5"></app-button>
+        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('18')" children="Playstation 4"></app-button>
+        <app-button [customClass]="'button'" (onClick)="getGamesByPlatform('1')" children="Xbox One"></app-button>
+      </div>
+      <div class="button-disposition">
+        <app-button *ngIf="previousPage" [customClass]="'button'" (onClick)="getNewPageFromGames(previousPage)" children="Previous page"></app-button>
+        <app-button *ngIf="nextPage" [customClass]="'button'" (onClick)="getNewPageFromGames(nextPage)" children="Next page"></app-button>
+      </div>
+
+      <div *ngIf="!isDevsLoaded">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <div *ngIf="isDevsLoaded">
+        <app-chart [datasets]="developersGamesDataset" [labels]="developersGamesLabels" [options]="gamesFromCompany" [chartType]="'bar'"></app-chart>
+      </div>
+    </article>
   </div>
 </section>
 
