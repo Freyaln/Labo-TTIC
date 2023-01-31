@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import {IFinancial} from "./data-handling.service";
+import {ICompanies, IFinancial, IGamesData, IGenreRequest} from "../interfaces/interfaces";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PopestiapiService {
+export class FetchingService {
 
 
   constructor(private http: HttpClient) {
@@ -28,44 +28,19 @@ export class PopestiapiService {
     return this.http.get<IGenreRequest>(`${environment.rawg_url}/genres?key=${environment.rawg_apiKey}`)
     }
 
+    getGamesFromCompany(id: string) {
+    return this.http.get<IGamesData>(`${environment.rawg_url}/games?key=${environment.rawg_apiKey}&developers=${id}&page_size=40`)
+    }
+
+    getPageFromGames(link: string) {
+      return this.http.get<IGamesData>(`${link}`)
+    }
+
+    getByPlatform(id: string, platform: string) {
+      return this.http.get<IGamesData>(`${environment.rawg_url}/games?key=${environment.rawg_apiKey}&developers=${id}&platforms=${platform}&page_size=40`)
+    }
+
     getAnnualEarnings(symbol: string) {
     return this.http.get<IFinancial>(`https://www.alphavantage.co/query?function=EARNINGS&symbol=${symbol}&apikey=${environment.alpha_apiKey}`)
     }
-}
-
-export interface ICompanies {
-  count: number,
-  next: string | null,
-  previous: string | null,
-  results: ICompaniesResult[]
-}
-
-export interface ICompaniesResult {
-  games: IGames[],
-  games_count: number,
-  id: number,
-  image_background: string,
-  name: string,
-  slug: string
-}
-
-export interface IGames {
-  added: number,
-  id: number,
-  name: string,
-  slug: string
-}
-
-export interface IGenreRequest {
-  count: number,
-  results: IGamesGenres[]
-}
-
-export interface IGamesGenres {
-  id: number,
-  name: string,
-  slug: string,
-  games: IGames[],
-  games_count: number,
-  image_background: string,
 }

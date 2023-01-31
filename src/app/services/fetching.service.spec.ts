@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PopestiapiService } from './popestiapi.service';
+import { FetchingService } from './fetching.service';
 
 describe('PopestiapiService', () => {
-  let service: PopestiapiService;
+  let service: FetchingService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PopestiapiService);
+    service = TestBed.inject(FetchingService);
   });
 
   it('should be created', () => {

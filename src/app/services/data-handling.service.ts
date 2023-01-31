@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import {ICompaniesResult, IGamesGenres, IGenreRequest, PopestiapiService} from "./popestiapi.service";
+import {
+  ICompaniesResult,
+  IFinancial,
+  IGamesDataResult,
+  IGamesGenres
+} from "../interfaces/interfaces";
+import {FetchingService} from "./fetching.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +28,11 @@ export class DataHandlingService {
   processedQuarterlyEarningsDatas: Idataset;
   // @ts-ignore
   processedGamesGenresDatas: Idataset;
+  // @ts-ignore
+  processedGamesByCompanyDatas: Idataset;
 
 
-  constructor(private _popestiapiService: PopestiapiService) {}
+  constructor(private _popestiapiService: FetchingService) {}
 
   randomRGB() {
     // No fluos output
@@ -94,6 +102,19 @@ export class DataHandlingService {
     return this.processedGamesGenresDatas;
   }
 
+   gamesFromCompanyDataHandler(datas: IGamesDataResult[]) {
+    this.processedGamesByCompanyDatas = {
+      dataset: [{
+        data: datas.map((i) => i.rating),
+        label: 'Games rating',
+        backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+        borderColor: datas.map((i) => this.randomRGB())
+      }],
+      labels: datas.map((i) => i.name)
+    }
+    return this.processedGamesByCompanyDatas
+   }
+
   annualEarningsDataHandler(datas: IFinancial) {
     this.preProcessedAnnualEarningsDatas =  {
       fiscalDateEnding: datas.annualEarnings.flatMap((i) => i.fiscalDateEnding),
@@ -140,44 +161,3 @@ export class DataHandlingService {
   }
 }
 
-export interface IFinancial {
-  annualEarnings: IAEarnings[],
-  quarterlyEarnings: IQEarnings[]
-}
-
-export interface IAEarnings {
-  fiscalDateEnding: string[],
-  reportedEPS: number[]
-}
-
-export interface IQEarnings {
-  fiscalDateEnding: string[],
-  reportedDate: string[],
-  reportedEPS: number[],
-  estimatedEPS: number[],
-  surprise: string[],
-  surprisePercentage: string[]
-}
-
-export interface IDataLabelColors {
-  data: number[],
-  label: string | string[],
-  backgroundColor?: string | string[],
-  borderColor?: string | string[],
-  fill?: boolean
-}
-
-export interface Idataset {
-  dataset: IDataLabelColors[],
-  labels: string[] | string
-}
-
-export interface IDeaths {
-  Country: string,
-  TotalDeaths: number
-}
-
-export interface IPercent {
-  Country: string,
-  PercentageOfDeath: number
-}
