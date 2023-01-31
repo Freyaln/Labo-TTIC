@@ -205,7 +205,7 @@ export class CompaniesDatasComponent {
           maintainAspectRatio: true,
           plugins: {
             legend: {
-              display: false,
+              display: true,
             }
           },
           scales: {

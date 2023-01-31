@@ -1,3 +1,7 @@
-<div *ngFor="let button of buttonList">
-  <app-button [customClass]="customClass" [children]="button.label" (onClick)="onClickEvent(button.id)"></app-button>
-</div>
+<app-button
+    *ngFor="let button of buttonList"
+    [customClass]="customClass"
+    [children]="button.label"
+    (onClick)="onClickEvent(button.id)"
+    >
+</app-button>
