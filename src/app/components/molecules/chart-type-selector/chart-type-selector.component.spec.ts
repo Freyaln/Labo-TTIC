@@ -8,9 +8,8 @@ describe('ChartTypeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartTypeSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [ChartTypeSelectorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ChartTypeSelectorComponent);
     component = fixture.componentInstance;

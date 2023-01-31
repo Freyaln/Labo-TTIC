@@ -3,15 +3,14 @@ import {
   ICompaniesResult,
   IFinancial,
   IGamesDataResult,
-  IGamesGenres
-} from "../interfaces/interfaces";
-import {FetchingService} from "./fetching.service";
+  IGamesGenres,
+} from '../interfaces/interfaces';
+import { FetchingService } from './fetching.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataHandlingService {
-
   // @ts-ignore
   processedPercentage: Idataset;
   // @ts-ignore
@@ -30,7 +29,6 @@ export class DataHandlingService {
   processedGamesGenresDatas: Idataset;
   // @ts-ignore
   processedGamesByCompanyDatas: Idataset;
-
 
   constructor(private _popestiapiService: FetchingService) {}
 
@@ -59,76 +57,85 @@ export class DataHandlingService {
   percentageGamesbyGenreDataHandler(datas: IGamesGenres[]) {
     const totalCount = datas.reduce((acc, genre) => acc + genre.games_count, 0);
     const averageCount = totalCount / datas.length;
-    let percentages: number[] = []
-    datas.forEach(genre => {
+    let percentages: number[] = [];
+    datas.forEach((genre) => {
       const percentage = (genre.games_count / totalCount) * 100;
-      percentages.push(+percentage.toFixed(2))
+      percentages.push(+percentage.toFixed(2));
     }),
-
-      this.processedPercentage = {
-        dataset: [{
-          data: percentages.sort((a, b) => b - a),
-          label: 'Total games percentage',
-          backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
-          borderColor: datas.map((i) => this.randomRGB())
-        }],
-        labels: datas.map((i) => i.name)
-      };
+      (this.processedPercentage = {
+        dataset: [
+          {
+            data: percentages.sort((a, b) => b - a),
+            label: 'Total games percentage',
+            backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+            borderColor: datas.map((i) => this.randomRGB()),
+          },
+        ],
+        labels: datas.map((i) => i.name),
+      });
     return this.processedPercentage;
   }
 
   gamesCountDataHandler(datas: ICompaniesResult[]) {
     this.processedGamesCountDatas = {
-      dataset: [{
-        data: datas.map((i) => i.games_count),
-        label: '',
-        backgroundColor: datas.map((i) => this.randomRGB())
-      }],
-      labels: datas.map((i) => i.name)
+      dataset: [
+        {
+          data: datas.map((i) => i.games_count),
+          label: '',
+          backgroundColor: datas.map((i) => this.randomRGB()),
+        },
+      ],
+      labels: datas.map((i) => i.name),
     };
     return this.processedGamesCountDatas;
   }
 
   gamesGenreDataHandler(datas: IGamesGenres[]) {
     this.processedGamesGenresDatas = {
-      dataset: [{
-        data: datas.map((i) => i.games_count),
-        label: 'Total games',
-        backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
-        borderColor: datas.map((i) => this.randomRGB())
-      }],
-      labels: datas.map((i) => i.name)
+      dataset: [
+        {
+          data: datas.map((i) => i.games_count),
+          label: 'Total games',
+          backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+          borderColor: datas.map((i) => this.randomRGB()),
+        },
+      ],
+      labels: datas.map((i) => i.name),
     };
     return this.processedGamesGenresDatas;
   }
 
-   gamesFromCompanyDataHandler(datas: IGamesDataResult[]) {
+  gamesFromCompanyDataHandler(datas: IGamesDataResult[]) {
     this.processedGamesByCompanyDatas = {
-      dataset: [{
-        data: datas.map((i) => i.rating),
-        label: 'Games rating',
-        backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
-        borderColor: datas.map((i) => this.randomRGB())
-      }],
-      labels: datas.map((i) => i.name)
-    }
-    return this.processedGamesByCompanyDatas
-   }
+      dataset: [
+        {
+          data: datas.map((i) => i.rating),
+          label: 'Games rating',
+          backgroundColor: datas.map((i) => this.randomRGBa('0.7')),
+          borderColor: datas.map((i) => this.randomRGB()),
+        },
+      ],
+      labels: datas.map((i) => i.name),
+    };
+    return this.processedGamesByCompanyDatas;
+  }
 
   annualEarningsDataHandler(datas: IFinancial) {
-    this.preProcessedAnnualEarningsDatas =  {
+    this.preProcessedAnnualEarningsDatas = {
       fiscalDateEnding: datas.annualEarnings.flatMap((i) => i.fiscalDateEnding),
-      reportedEPS: datas.annualEarnings.flatMap((i) => i.reportedEPS)
-    }
+      reportedEPS: datas.annualEarnings.flatMap((i) => i.reportedEPS),
+    };
     this.processedAnnualEarningsDatas = {
-      dataset: [{
-        data: this.preProcessedAnnualEarningsDatas.reportedEPS,
-        label: '',
-        backgroundColor: this.randomRGB()
-      }],
-      labels: this.preProcessedAnnualEarningsDatas.fiscalDateEnding
-    }
-    return this.processedAnnualEarningsDatas
+      dataset: [
+        {
+          data: this.preProcessedAnnualEarningsDatas.reportedEPS,
+          label: '',
+          backgroundColor: this.randomRGB(),
+        },
+      ],
+      labels: this.preProcessedAnnualEarningsDatas.fiscalDateEnding,
+    };
+    return this.processedAnnualEarningsDatas;
   }
 
   quarterlyEarningsDataHandler(datas: IFinancial) {
@@ -139,25 +146,26 @@ export class DataHandlingService {
       estimatedEPS: datas.quarterlyEarnings.flatMap((i) => i.estimatedEPS),
       surprise: datas.quarterlyEarnings.flatMap((i) => i.surprise),
       surprisePercentage: datas.quarterlyEarnings.flatMap((i) => i.surprisePercentage),
-    }
+    };
     this.processedQuarterlyEarningsDatas = {
-      dataset: [{
-        data: this.preProcessedQuarterlyEarningsDatas.reportedEPS,
-        label: 'Reported EPS',
-        backgroundColor: this.randomRGB(),
-        borderColor: this.randomRGB(),
-        fill: true,
-      },
+      dataset: [
+        {
+          data: this.preProcessedQuarterlyEarningsDatas.reportedEPS,
+          label: 'Reported EPS',
+          backgroundColor: this.randomRGB(),
+          borderColor: this.randomRGB(),
+          fill: true,
+        },
         {
           data: this.preProcessedQuarterlyEarningsDatas.estimatedEPS,
           label: 'Estimated EPS',
           backgroundColor: this.randomRGB(),
           borderColor: this.randomRGB(),
           fill: true,
-        }],
-      labels: this.preProcessedQuarterlyEarningsDatas.fiscalDateEnding
-    }
+        },
+      ],
+      labels: this.preProcessedQuarterlyEarningsDatas.fiscalDateEnding,
+    };
     return this.processedQuarterlyEarningsDatas;
   }
 }
-

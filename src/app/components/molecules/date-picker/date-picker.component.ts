@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss']
+  styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent {
-
   @Output() selectedDate = new EventEmitter<{
     startingDate: string;
     endingDate: string;
@@ -20,7 +19,7 @@ export class DatePickerComponent {
     this.endingDate = endDate.value;
     this.selectedDate.emit({
       startingDate: this.startingDate,
-      endingDate: this.endingDate
+      endingDate: this.endingDate,
     });
   }
 }

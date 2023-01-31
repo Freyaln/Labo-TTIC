@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-
   @Input() submit: boolean = false;
   @Input() customClass: string = '';
   @Input() children: any = '';
@@ -14,7 +13,7 @@ export class ButtonComponent {
 }
 
 export interface IButton {
-  children: any,
-  customClass?: string,
-  submit?: boolean
+  children: any;
+  customClass?: string;
+  submit?: boolean;
 }

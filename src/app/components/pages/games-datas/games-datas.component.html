@@ -2,19 +2,29 @@
   <div class="general-disposition">
     <article class="genre-block">
       <h2 class="title">Total games by genre</h2>
-<div *ngIf="!gamesIsLoaded">
-  <app-loading-spinner></app-loading-spinner>
-</div>
-<div *ngIf="gamesIsLoaded">
-<app-chart [datasets]="genreDataset" [labels]="genreLabels" [options]="gamesChartOptions" [chartType]="'pie'"></app-chart>
-</div>
+      <div *ngIf="!gamesIsLoaded">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <div *ngIf="gamesIsLoaded">
+        <app-chart
+          [datasets]="genreDataset"
+          [labels]="genreLabels"
+          [options]="gamesChartOptions"
+          [chartType]="'pie'"
+        ></app-chart>
+      </div>
       <h2 class="title">Percentage of games by genre</h2>
-    <div *ngIf="!gamesIsLoaded">
-      <app-loading-spinner></app-loading-spinner>
-    </div>
-    <div *ngIf="gamesIsLoaded">
-      <app-chart [datasets]="genresAverageDataset" [labels]="genresAverageLabels" [options]="gamesAverageOptions" [chartType]="'bar'"></app-chart>
-    </div>
+      <div *ngIf="!gamesIsLoaded">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+      <div *ngIf="gamesIsLoaded">
+        <app-chart
+          [datasets]="genresAverageDataset"
+          [labels]="genresAverageLabels"
+          [options]="gamesAverageOptions"
+          [chartType]="'bar'"
+        ></app-chart>
+      </div>
     </article>
   </div>
 </section>

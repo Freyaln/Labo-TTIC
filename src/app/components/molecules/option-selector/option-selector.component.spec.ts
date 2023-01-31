@@ -8,9 +8,8 @@ describe('CountrySelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OptionSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [OptionSelectorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OptionSelectorComponent);
     component = fixture.componentInstance;

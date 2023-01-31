@@ -1,13 +1,11 @@
-import {Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-
-  @Input() itemList : string[] = [];
+  @Input() itemList: string[] = [];
   @Input() customClass: string = '';
-
 }

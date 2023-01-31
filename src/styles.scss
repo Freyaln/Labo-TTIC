@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: #c4c4c4;
   //background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
 }
@@ -167,11 +168,10 @@ body {
 
         &:active {
           color: #666;
-          box-shadow: inset 4px 4px 12px #c5c5c5,
-          inset -4px -4px 12px #ffffff;
+          box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
         }
         &:before {
-          content: "";
+          content: '';
           position: absolute;
           left: 50%;
           transform: translateX(-50%) scaleY(1) scaleX(1.25);
@@ -185,7 +185,7 @@ body {
           z-index: -1;
         }
         &:after {
-          content: "";
+          content: '';
           position: absolute;
           left: 55%;
           transform: translateX(-50%) scaleY(1) scaleX(1.45);
@@ -217,13 +217,6 @@ body {
   }
 }
 
-
-
-
-
-
-
-
 .list {
   display: flex;
   flex-direction: column;
@@ -241,4 +234,3 @@ body {
     color: black;
   }
 }
-

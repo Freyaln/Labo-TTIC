@@ -8,9 +8,8 @@ describe('ChecboxSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChecboxSelectorComponent ]
-    })
-    .compileComponents();
+      declarations: [ChecboxSelectorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ChecboxSelectorComponent);
     component = fixture.componentInstance;

@@ -1,8 +1,11 @@
 <ul [class]="customClass" *ngIf="!id">
-  <li *ngFor="let item of itemList"><a routerLink="{{item.link}}">{{item.label}}</a></li>
+  <li *ngFor="let item of itemList">
+    <a routerLink="{{ item.link }}">{{ item.label }}</a>
+  </li>
 </ul>
 
 <ul [class]="customClass" *ngIf="id">
-  <li *ngFor="let item of itemList" (click)="onClick.emit(item.link)">{{item.label}}</li>
+  <li *ngFor="let item of itemList" (click)="onClick.emit(item.link)">
+    {{ item.label }}
+  </li>
 </ul>
-

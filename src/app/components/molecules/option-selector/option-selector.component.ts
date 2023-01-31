@@ -1,20 +1,17 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-option-selector',
   templateUrl: './option-selector.component.html',
-  styleUrls: ['./option-selector.component.scss']
+  styleUrls: ['./option-selector.component.scss'],
 })
 export class OptionSelectorComponent {
-
   @Input() symbolList: ISymbol[] = [];
   @Output() selectedSymbol = new EventEmitter<any>();
 
   symbol: string = '';
 
-  constructor() {
-
-  }
+  constructor() {}
 
   onSelectSymbol(value: string) {
     this.symbol = value;
@@ -22,8 +19,7 @@ export class OptionSelectorComponent {
   }
 }
 
-
 export interface ISymbol {
-  cName: string,
-  cSymbol: string
+  cName: string;
+  cSymbol: string;
 }
