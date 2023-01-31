@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { FetchingService } from '../../../services/fetching.service';
 import { DataHandlingService } from '../../../services/data-handling.service';
-import { ISymbol } from '../../molecules/option-selector/option-selector.component';
-import { ListInterface } from '../../atoms/link-list/link-list.component';
-import { IButtonPlatform, ICompaniesResult } from '../../../interfaces/interfaces';
+import {IButtonPlatform, ICompaniesResult, ISymbol, ListInterface} from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-companies-datas',

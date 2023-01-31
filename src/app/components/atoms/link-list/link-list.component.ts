@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {ListInterface} from "../../../interfaces/interfaces";
 
 @Component({
   selector: 'app-link-list',
@@ -12,7 +13,3 @@ export class LinkListComponent {
   @Output() onClick: EventEmitter<any> = new EventEmitter();
 }
 
-export interface ListInterface {
-  label: string;
-  link?: string;
-}

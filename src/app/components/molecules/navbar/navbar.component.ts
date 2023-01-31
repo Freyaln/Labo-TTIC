@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListInterface } from '../../atoms/link-list/link-list.component';
+import {ListInterface} from "../../../interfaces/interfaces";
 
 @Component({
   selector: 'app-navbar',

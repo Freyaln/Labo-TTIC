@@ -12,8 +12,3 @@ export class ButtonComponent {
   @Output() onClick: EventEmitter<any> = new EventEmitter();
 }
 
-export interface IButton {
-  children: any;
-  customClass?: string;
-  submit?: boolean;
-}

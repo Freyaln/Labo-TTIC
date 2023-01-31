@@ -166,3 +166,19 @@ export interface IButtonPlatform {
   label: string;
   id: string;
 }
+
+export interface IButton {
+  children: any;
+  customClass?: string;
+  submit?: boolean;
+}
+
+export interface ListInterface {
+  label: string;
+  link?: string;
+}
+
+export interface ISymbol {
+  cName: string;
+  cSymbol: string;
+}

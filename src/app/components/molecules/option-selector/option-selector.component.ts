@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {ISymbol} from "../../../interfaces/interfaces";
 
 @Component({
   selector: 'app-option-selector',
@@ -19,7 +20,4 @@ export class OptionSelectorComponent {
   }
 }
 
-export interface ISymbol {
-  cName: string;
-  cSymbol: string;
-}
+
